@@ -6,12 +6,12 @@ Please note: to do the same experiment and use RTE for your projects, please mak
 1. Install kubernetes. We installed (minikupbe) on a Ububtue server. Your can follow the stpes as shown in this URL: https://minikube.sigs.k8s.io/docs/start/
 2. Install Istio in your cluster. You can follow the setpes as shown in this this URL: https://istio.io/latest/docs/setup/install/ We did install a DEMO profile for the experiment.
 3. Install the Google Demo app (Online Boutique). You can do this by visting the Online Boutique's github repository this URL: https://github.com/GoogleCloudPlatform/microservices-demo Then you can follow as we did by going to the release folder > then run the command: kubectl install -f .
-4. Install Promethusus. You can follow the stpes in this URL: https://istio.io/latest/docs/ops/integrations/prometheus/ Make sure the default port is 9090. If you want change this, please make sure to specifiy this in the RTE code then push your new container image for deployment. 
-5. Remove the emailservice (the legit one) to allow for the malicious service to take place in the next steps. To remove the email service, please run this command: kubectl remove deployment emailservice
-5. Install the RTE component as found in the folder here /RTE which contins the followiong by running this command: kubectl install -f .
-  1. RTE depploeyement. This YAML file includes a call to an image pre-built for DEMO purpose. You can use to test RTE. However, if made any change to RTE code, please make sure to deploy your image through run a docker build command inside the RTE folder:  docker build rte .
-  2. Envoy filtuer to captre outboubd for each sidecar incldude for all microservices. 
-  3. Emailservice malicious deployment to play the role of malicious services. Nothing has changed in the code expect to make calls to other services that the emailservice should not or expect to call. 
+Install Prometheus. You can follow the stpes in this URL: https://istio.io/latest/docs/ops/integrations/prometheus/ Make sure the default port is 9090. If you want change this, please make sure to specify this in the RTE code then push your new container image for deployment.
+5. Remove the email service (the legit one) to allow for the malicious service to take place in the next steps. To remove the email service, please run this command: kubectl remove deployment email service. 
+6. Install the RTE component as found in the folder here /RTE which contains all the YAML deployment needed as shown below. Please run this command inside the folder: kubectl install -f .
+  1. RTE deployment. This YAML file includes a call to an image pre-built for DEMO purpose to be used. You can use it to test RTE. However, if made any change to RTE code, please make sure to edit the RTE YAML (image reference to be yours) file and deploy your image through run a docker build command inside the RTE folder:  docker build rte .
+  2. Envoy filter YAML to capture outbound traffic for each sidecar include for all microservices.
+  3. Emailservice malicious deployment YAML to place the new malicious services. Nothing has changed in this code expect to make calls to other services that the email service should not or expect to call at all.
   
 
 
