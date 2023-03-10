@@ -1,5 +1,5 @@
 # Runtime Trust Evaluation (RTE)
-To add the Runtime Trust Evaluation (RTE) component to be part of the service mesh to evaluate participating microservices at runtime, please follow the below steps: 
+To add the Runtime Trust Evaluation (RTE) component to be part of your service mesh to evaluate participating microservices at runtime, please follow the below steps: 
 
 Please note: to do the same experiment and use RTE for your projects, please make sure to deploy RTE after you deploy your application to your cluster. Also make sure prometheus runs on port 9090 or you can change the port and IP in the code and deploy your container. The time that RTE runs is defined by default in 60 min. You can change this as well in the code and push your new container image for deployment.
 
