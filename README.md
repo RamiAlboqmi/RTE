@@ -7,7 +7,7 @@ Please note: to do the same experiment and use RTE for your projects, please mak
 2. Install Istio in your cluster. You can follow the setpes as shown in this this URL: https://istio.io/latest/docs/setup/install/ We did install a DEMO profile for the experiment.
 3. Install the Google Demo app (Online Boutique). You can do this by visting the Online Boutique's github repository this URL: https://github.com/GoogleCloudPlatform/microservices-demo Then you can follow as we did by going to the release folder > then run the command: kubectl install -f .
 4. Install Promethusus. You can follow the stpes in this URL: https://istio.io/latest/docs/ops/integrations/prometheus/ Make sure the default port is 9090. If you want change this, please make sure to specifiy this in the RTE code then push your new container image for deployment. 
-5. Remove the emailservice (the legit one) to allow for the malcious service to take place in the next steps. To remove the email service, please run this command: kubectl remove deployment emailservice
+5. Remove the emailservice (the legit one) to allow for the malicious service to take place in the next steps. To remove the email service, please run this command: kubectl remove deployment emailservice
 5. Install the RTE component as found in the folder here /RTE which contins the followiong by running this command: kubectl install -f .
   1. RTE depploeyement. This YAML file includes a call to an image pre-built for DEMO purpose. You can use to test RTE. However, if made any change to RTE code, please make sure to deploy your image through run a docker build command inside the RTE folder:  docker build rte .
   2. Envoy filtuer to captre outboubd for each sidecar incldude for all microservices. 
