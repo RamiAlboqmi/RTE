@@ -10,8 +10,8 @@ Please note: to do the same experiment and use RTE for your projects, please mak
 5. Install the RTE component as found in the folder here /RTE directory here which contains all the YAML deployment needed as shown below. Please run this command inside the folder: **kubectl apply -f .**
   * RTE deployment. This YAML file includes a call to an image pre-built for DEMO purpose to be used. In the YAML file, you can set the threasholdTimeInMin to allow RTE to collect telemetry after this threshold time. By default it is set to 60min.
   * Envoy filter YAML to capture outbound traffic for each sidecar include for all microservices.
-6. Only after thresholdTime time passed, please Remove the emailservice (the legit one) to allow for the malicious service to take place in the next steps. To remove the email service, please run this rommand: **kubectl remove deployment email service.**
-7. Only after thresholdTime time passed, install the Emailservice malicious deployment YAML in the /MaliciousEmailService directory to place the new malicious services. Nothing has changed in this code expect to make calls to other services that the email service should not or expect to call at all. To install this, go to /MaliciousEmailService directory then run: **kubectl apply -f .**
+6. **To teste the RTE and only after thresholdTime time passed**, please Remove the emailservice (the legit one) to allow for the malicious service to take place in the next steps. To remove the email service, please run this rommand: **kubectl remove deployment email service.**
+7. **To teste the RTE and only after thresholdTime time passed**, install the Emailservice malicious deployment YAML in the /MaliciousEmailService directory to place the new malicious services. Nothing has changed in this code expect to make calls to other services that the email service should not or expect to call at all. To install this, go to /MaliciousEmailService directory then run: **kubectl apply -f .**
   
 
 
