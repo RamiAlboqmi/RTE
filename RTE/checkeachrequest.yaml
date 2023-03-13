@@ -1,1 +1,98 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: checkeachrequest
+  namespace: default
+spec:
+  configPatches:
+    - applyTo: HTTP_FILTER
+      match:
+        context: SIDECAR_OUTBOUND
+        listener:
+          filterChain:
+            filter:
+              name: 'envoy.filters.network.http_connection_manager'
+              subFilter:
+                name: 'envoy.filters.http.router'
+      patch:
+        operation: INSERT_BEFORE
+        value:
+          name: envoy.lua
+          typed_config:
+            '@type': 'type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua'
+            inlineCode: |
+             
+              function split_ (string_, bysep)
+                local temp={}
+                for str in string.gmatch(string_, "([^"..bysep.."]+)") do
+                        table.insert(temp, str)
+                end
+                return temp
+               end
 
+         
+         
+              function envoy_on_request(request_handle)
+                print("***********************************************************************************")
+                local request_headers = request_handle:headers()
+                local path = request_headers:get("x-envoy-downstream-service-node")
+                local callerid = request_headers:get("x-envoy-peer-metadata-id")
+                local path = request_handle:headers():get(":path")
+                local x_envoy = request_headers:get("x-envoy-decorator-operation") 
+                print("x_envoy =", x_envoy)
+                local target_ms = split_(x_envoy,"\\.")[1]
+                print("target_ms =", target_ms)
+                print("callerid =", callerid)
+
+                local currentMS = split_(split_(callerid,"~")[3],"-")[1]
+                local values = currentMS  .."/" ..    target_ms
+                print("*********************************************************************************** start in sidecar of:", currentMS)
+                print("values:", values)
+                local request_headers = request_handle:headers()
+                local service_url = "rte.istio-system.svc.cluster.local"
+                local cluster_url = "outbound|8099||" .. service_url
+                local request_headers_values = {
+                 [":method"] = "GET",
+                 [":path"] = "/IsItAnunauthorizedAccess/" .. values ,
+                 [":authority"] = service_url
+                 }
+                local timeout_value = 1000
+                local response_headers_values, response_body_values = request_handle:httpCall(
+                 cluster_url,
+                 request_headers_values,
+                 request_body,
+                 timeout_value
+                 )
+                local decision = tostring(response_body_values);
+                print("Response", decision)
+                if decision == "3" then
+                  print("Can not till yet. There is is no baseline.")
+                end
+                if decision == "1" then 
+                  print("There is a match. No trust should be decreased.")
+                end
+                if decision == "0" then 
+                  print("The trust has to be decreased")
+                  local request_headers_values_ = {
+                   [":method"] = "GET",
+                   [":path"] = "/DetermineNewTrustLevelforMaliciousMicroservice/" .. values ,
+                   [":authority"] = service_url
+                   }
+                  local timeout_value_ = 1000
+                  local response_headers_values, response_body_values_ = request_handle:httpCall(
+                   cluster_url,
+                   request_headers_values_,
+                   request_body,
+                   timeout_value
+                 )
+                  local trsut_value = tostring(response_body_values_);
+                  print("New trsut value=", trsut_value)
+                end
+                print("values", values)
+
+
+                print("*********************************************************************************** end in sidecar of:", currentMS)
+
+               
+                
+              end
