@@ -19,3 +19,5 @@ Helpfull commands:
 - To show the logs for a sidecar, please run this: **kubectl logs pod POD_NAME -c istio-proxy**
 - To show the logs for a pod like RTE, please run this: **kubectl logs pod POD_NAME -n istio-system** 
 
+
+Please note the source code for RTE can be found in the /src directory. 
