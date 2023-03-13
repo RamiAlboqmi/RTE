@@ -3,7 +3,7 @@ To add the Runtime Trust Evaluation (RTE) component to be part of your service m
 
 Please note: to do the same experiment and use RTE for your projects, please make sure to deploy RTE after you deploy your application to your cluster to allow RTE to do the evaluation process. Also make sure prometheus runs on port 9090 or you can change the port and IP in the code and deploy your container. The time that RTE runs is defined by default in 60 min. You can change this as well in the code and push your new container image for deployment.
 
-1. Install kubernetes. We installed (minikupbe) on a Ububtue server. Your can follow the stpes as shown in this URL: https://minikube.sigs.k8s.io/docs/start/
+1. Install kubernetes. We installed (minikupbe) on a Ubuntu server. Your can follow the stpes as shown in this URL: https://minikube.sigs.k8s.io/docs/start/
 2. Install Istio in your cluster. You can follow the setpes as shown in this this URL: https://istio.io/latest/docs/setup/install/ We did install a DEMO profile for the experiment.
 3. Install the Google Demo app (Online Boutique). You can do this by visting the Online Boutique's github repository this URL: https://github.com/GoogleCloudPlatform/microservices-demo Then you can follow as we did by going to the release folder > then run the command: kubectl install -f .
 Install Prometheus. You can follow the stpes in this URL: https://istio.io/latest/docs/ops/integrations/prometheus/ Make sure the default port is 9090. If you want change this, please make sure to specify this in the RTE code then push your new container image for deployment.
