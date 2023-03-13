@@ -37,6 +37,6 @@ spec:
         - containerPort: 8080
         env:
         - name: thresholdTimeInMins
-          value: "1"
+          value: "60"
       imagePullSecrets:
       - name: regcred
