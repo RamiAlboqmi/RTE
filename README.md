@@ -16,6 +16,6 @@ Please note: to do the same experiment and use RTE for your projects, please mak
 
 
 Helpfull commands: 
-- To show the logs for a sidecar, please run this: kubectl logs pod POD_NAME -c istio-proxy 
-- To show the logs for a pod like RTE, please run this: kubectl logs pod POD_NAME -n istio-system 
+- To show the logs for a sidecar, please run this: **kubectl logs pod POD_NAME -c istio-proxy**
+- To show the logs for a pod like RTE, please run this: **kubectl logs pod POD_NAME -n istio-system** 
 
