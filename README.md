@@ -1,7 +1,7 @@
 # Runtime Trust Evaluation (RTE)
 To add the Runtime Trust Evaluation (RTE) component to be part of your service mesh to evaluate participating microservices at runtime, please follow the below steps: 
 
-Please note: to do the same experiment and use RTE for your projects, please make sure to deploy RTE after you deploy your application to your cluster to allow RTE to do the evaluation process. Also make sure prometheus runs on port 9090 or you can change the port and IP in the code and deploy your container. The time that RTE runs is defined by default in 60 min. You can change this as well in the code and push your new container image for deployment.
+Please note: to do the same experiment and use RTE for your projects, please make sure to deploy RTE after you deploy your application to your cluster to allow RTE to do the evaluation process. Also make sure prometheus runs on port 9090 or you can change the port and IP in the code and deploy your container. The time that RTE runs is defined by default in 60 min. You can change this in RTE YAML deployment file. 
 
 1. Install kubernetes. We installed (minikube) on a Ubuntu server. You can follow the steps as shown in this URL: https://minikube.sigs.k8s.io/docs/start/
 2. Install Istio in your cluster. You can follow the steps as shown in this this URL: https://istio.io/latest/docs/setup/install/ We did install a DEMO profile for the experiment.
